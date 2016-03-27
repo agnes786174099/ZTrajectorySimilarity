@@ -1,13 +1,6 @@
-import org.rosuda.JRI.Rengine;
+package trajOriginal;
 
-/**
- * expect value type
- */
-enum ExpectType{
-	INT,INT_ARR,
-	STRING,STRING_ARR,
-	DOUBLE,DOUBLE_ARR
-}
+import org.rosuda.JRI.Rengine;
 
 /***
  * remember to close R(closeR())
@@ -15,13 +8,21 @@ enum ExpectType{
  *
  */
 public class CallR {
+	/**
+	 * expect value type
+	 */
+	public enum ExpectType{
+		INT,INT_ARR,
+		STRING,STRING_ARR,
+		DOUBLE,DOUBLE_ARR
+	}
 	private Rengine rengine;
 	
 	/***
 	 * connect R
 	 * @return boolean
 	 */
-	boolean connect(){
+	public boolean connect(){
 		rengine=new Rengine(new String[]{"--vanilla"},false,null);
 		if(!rengine.waitForR())
 			return false;
@@ -31,7 +32,7 @@ public class CallR {
 	/***
 	 * close R
 	 */
-	void closeR(){
+	public void closeR(){
 		if(rengine!=null)
 			rengine.end();
 	}
@@ -42,7 +43,7 @@ public class CallR {
 	 * @param et (Expect return type)
 	 * @return
 	 */
-	Object doRCmd(String cmd,ExpectType et){
+	public Object doRCmd(String cmd,ExpectType et){
 		switch(et){
 		case INT:return rengine.eval(cmd).asInt();
 		case INT_ARR:return rengine.eval(cmd).asIntArray();
@@ -58,7 +59,8 @@ public class CallR {
 	 * run R command without return value
 	 * @param cmd
 	 */
-	void doRCmd(String cmd){
+	public void doRCmd(String cmd){
 		rengine.eval(cmd);
 	}
 }
+
