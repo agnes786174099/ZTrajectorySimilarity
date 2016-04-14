@@ -8,3 +8,4 @@ tj<-trajs[[25]]
 for(i in 1:trajNum){
     dis<-EditDist(tj,trajs[[i]])
 }
+#2022
